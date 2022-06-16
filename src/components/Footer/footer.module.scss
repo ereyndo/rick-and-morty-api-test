@@ -1,0 +1,15 @@
+@import 'assets/styles/colors';
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    border-top: 2px solid $secondaryColor;
+    padding: 10px 0;
+    color: $footerColor;
+
+    &Description {
+        color: $footerDescriptionColor;
+    }
+}

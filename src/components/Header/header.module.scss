@@ -1,0 +1,9 @@
+@import 'assets/styles/colors';
+
+.header {
+  position: fixed;
+  width: 100%;
+  padding: 8px 0;
+  background-color: $secondaryColor;
+  z-index: 100;
+}

@@ -1,0 +1,50 @@
+@import 'assets/styles/colors';
+@import 'assets/styles/sizes';
+
+.container {
+  margin: 40px 0;
+  color: $secondaryColor;
+}
+
+.name {
+  margin-bottom: 46px;
+  text-align: center;
+  font-size: 36px;
+  text-shadow: 0 0 3px #98b6c2;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .img {
+    flex: 0.24;
+    object-fit: contain;
+    border-radius: 20px;
+  }
+
+  .textInfo {
+    flex: 0.54;
+    margin-left: 80px;
+    font-size: 18px;
+
+    &Item {
+      margin-bottom: 6px;
+      color: $footerDescriptionColor;
+
+      .nameOfKey {
+        color: $secondaryColor;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.notFound {
+  line-height: $mainHeight;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: $secondaryColor;
+}

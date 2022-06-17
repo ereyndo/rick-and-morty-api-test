@@ -2,24 +2,20 @@ import {CharacterCard} from './CharacterCard';
 import styles from './characterLibrary.module.scss';
 import {useEffect, useState} from 'react';
 
-export type Character = {
+type CharacterProps = {
+  pageName: string
+}
+
+type Character = {
   id: number,
   name: string,
-  species: string,
-  gender: string,
-  location: {
-    name: string,
-    url: string,
-  },
-  episode: Array<string>,
   status: string,
-  created: string,
   image: string
-};
+}
 
-const basicCharacterListLink = 'https://rickandmortyapi.com/api/character/?page=0';
+const baseURLToFetch = 'https://rickandmortyapi.com/api/character/?page=0';
 
-export const CharacterLibrary = () => {
+export const CharacterLibrary = ({pageName}: CharacterProps) => {
   const [listOfCharacters, setListOfCharacters] = useState<Character[]>([]);
   const [nextPageToFetch, setNextPageToFetch] = useState<string>('');
   const [needToFetchNewCharacters, setNeedToFetchNewCharacters] = useState<boolean>(false);
@@ -27,10 +23,17 @@ export const CharacterLibrary = () => {
   useEffect(() => {
     async function fetchCharacters() {
       try {
-        const response = await fetch(basicCharacterListLink);
+        const response = await fetch(baseURLToFetch);
         if (response.ok) {
           const json = await response.json();
-          setListOfCharacters(json.results);
+          setListOfCharacters(json.results.map((el: Character) => {
+            return {
+              id: el.id,
+              name: el.name,
+              status: el.status,
+              image: el.image,
+            }
+          }));
           setNextPageToFetch(json.info.next);
         }
       } catch (error) {

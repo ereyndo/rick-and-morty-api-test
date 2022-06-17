@@ -5,16 +5,29 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
-import {Character} from '../CharacterLibrary';
 import styles from './characterCard.module.scss';
+import {useNavigate} from 'react-router-dom';
 
 type CharacterCardProps = {
   characterData: Character
 };
 
+type Character = {
+  id: number,
+  name: string,
+  status: string,
+  image: string
+}
+
 export const CharacterCard = ({characterData}: CharacterCardProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    navigate(`/character/${characterData.id}`);
+  };
+
   return (
-    <Card sx={{ maxWidth: 280 }} style={{backgroundColor: "#a0c064"}}>
+    <Card sx={{ maxWidth: 280 }} style={{backgroundColor: "#a0c064"}} onClick={handleClick}>
       <CardActionArea className={styles.cardActionArea}>
         <CardMedia
           component="img"

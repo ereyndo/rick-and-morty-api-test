@@ -1,7 +1,8 @@
 import {useParams} from 'react-router-dom';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Nullable} from 'tsHelper';
 import styles from './characterInfo.module.scss';
+import {Placeholder} from '../../Placeholder';
 
 const baseURLToFetch = 'https://rickandmortyapi.com/api/character/';
 
@@ -22,9 +23,8 @@ type Character = {
 
 export const CharacterInfo = () => {
   const [characterData, setCharacterData] = useState<Nullable<Character>>(null);
-  const [noCharacter, setNoCharacter] = useState<boolean>(false);
+  const [placeholderText, setPlaceholderText] = useState<string>('Loading...');
   const {characterId} = useParams<{characterId: string}>();
-  const placeholderRef = useRef<Nullable<HTMLDivElement>>(null);
 
   useEffect(() => {
     async function fetchCharacter() {
@@ -37,7 +37,7 @@ export const CharacterInfo = () => {
             setCharacterData(json);
           }
         } else {
-          setNoCharacter(true);
+          setPlaceholderText('There is no such character');
         }
       } catch (error) {
         // somehow process an error
@@ -46,12 +46,6 @@ export const CharacterInfo = () => {
 
     fetchCharacter();
   }, [characterId]);
-
-  useEffect(() => {
-    if ((placeholderRef.current && noCharacter)) {
-      placeholderRef.current.textContent = 'There is no such an element';
-    }
-  }, [noCharacter]);
 
   return (
     characterData
@@ -92,6 +86,6 @@ export const CharacterInfo = () => {
         </div>
       </div>
       :
-      <div ref={placeholderRef} className={styles.placeholder}>Loading...</div>
+      <Placeholder text={placeholderText}/>
   )
 };

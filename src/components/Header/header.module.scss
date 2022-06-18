@@ -3,6 +3,8 @@
 
 .header {
   position: fixed;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: 8px 20px;
   background-color: $secondaryColor;
@@ -10,5 +12,10 @@
 
   @include screen-mobile {
     padding: 5px 10px;
+  }
+
+  .logo {
+    height: 56px;
+    cursor: pointer;
   }
 }

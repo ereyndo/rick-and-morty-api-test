@@ -2,6 +2,7 @@ import {Autocomplete, TextField} from '@mui/material';
 import {SyntheticEvent, useEffect, useRef, useState} from 'react';
 import {Nullable} from 'tsHelper';
 import {useNavigate} from 'react-router-dom';
+import styles from './search.module.scss';
 
 type Character = {
   id: number,
@@ -73,6 +74,7 @@ export const Search = () => {
 
   return (
     <Autocomplete
+      className={styles.search}
       inputValue={inputValue}
       onInputChange={handleInputChange}
       onChange={handleChange}

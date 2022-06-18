@@ -1,5 +1,4 @@
 @import 'assets/styles/colors';
-@import 'assets/styles/sizes';
 @import 'assets/styles/mixins';
 
 .container {
@@ -59,7 +58,7 @@
 
     &Item {
       margin-bottom: 6px;
-      color: $footerDescriptionColor;
+      color: $lightGreyColor;
 
       .nameOfKey {
         color: $secondaryColor;
@@ -67,12 +66,4 @@
       }
     }
   }
-}
-
-.placeholder {
-  line-height: $mainHeight;
-  text-align: center;
-  font-size: 40px;
-  font-weight: bold;
-  color: $secondaryColor;
 }

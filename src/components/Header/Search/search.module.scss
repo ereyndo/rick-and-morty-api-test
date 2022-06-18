@@ -1,0 +1,9 @@
+@import 'assets/styles/mixins';
+
+.search {
+  margin-right: 50px;
+
+  @include screen-mobile {
+    margin-right: 20px;
+  }
+}

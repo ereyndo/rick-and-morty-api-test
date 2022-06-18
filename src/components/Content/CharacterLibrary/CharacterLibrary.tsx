@@ -1,6 +1,7 @@
 import {CharacterCard} from './CharacterCard';
 import styles from './characterLibrary.module.scss';
 import {useEffect, useState} from 'react';
+import {Placeholder} from '../../Placeholder';
 
 type CharacterProps = {
   pageName: string
@@ -83,10 +84,14 @@ export const CharacterLibrary = ({pageName}: CharacterProps) => {
   }, [needToFetchNewCharacters, nextPageToFetch]);
 
   return (
-    <div className={styles.library}>
-      {
-        listOfCharacters.map(el => <CharacterCard key={el.id} characterData={el}/>)
-      }
-    </div>
+    listOfCharacters.length
+      ?
+      <div className={styles.library}>
+        {
+          listOfCharacters.map(el => <CharacterCard key={el.id} characterData={el}/>)
+        }
+      </div>
+      :
+      <Placeholder text={'Loading...'}/>
   );
 };

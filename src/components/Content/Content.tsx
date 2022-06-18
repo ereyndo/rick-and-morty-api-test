@@ -8,7 +8,7 @@ export const Content = () => {
     <main className={styles.content}>
       <Routes>
         <Route path='/' element={<CharacterLibrary pageName='home'/>}/>
-        {/*<Route path='/my-list' element={<CharacterLibrary pageName='my-list'/>}/>*/}
+        <Route path='/my-list' element={<CharacterLibrary pageName='my-list'/>}/>
         <Route path='/character/:characterId' element={<CharacterInfo/>}/>
         <Route path='*' element={<Navigate to='/'/>}/>
       </Routes>

@@ -25,8 +25,14 @@ type Character = {
 }
 
 export const CharacterCard = ({characterData}: CharacterCardProps) => {
-  const [thumbUp, setThumbUp] = useState<boolean>(false);
-  const [thumbDown, setThumbDown] = useState<boolean>(false);
+  const [thumbUp, setThumbUp] = useState<boolean>(() => {
+    const value = localStorage.getItem(characterData.id.toString());
+    return value === 'liked';
+  });
+  const [thumbDown, setThumbDown] = useState<boolean>(() => {
+    const value = localStorage.getItem(characterData.id.toString());
+    return value === 'disliked';
+  });
   const navigate = useNavigate();
 
   const handleCardClick = () => {
@@ -35,12 +41,30 @@ export const CharacterCard = ({characterData}: CharacterCardProps) => {
 
   const handleThumbUpClick = () => {
     setThumbDown(false);
-    setThumbUp((prevState => !prevState));
+    setThumbUp((prevState => {
+      const newState = !prevState;
+      const idString = characterData.id.toString();
+      if (newState) {
+        localStorage.setItem(idString, 'liked');
+      } else {
+        localStorage.removeItem(idString);
+      }
+      return newState;
+    }));
   };
 
   const handleThumbDownClick = () => {
     setThumbUp(false);
-    setThumbDown((prevState => !prevState));
+    setThumbDown((prevState => {
+      const newState = !prevState;
+      const idString = characterData.id.toString();
+      if (newState) {
+        localStorage.setItem(idString, 'disliked');
+      } else {
+        localStorage.removeItem(idString);
+      }
+      return newState;
+    }));
   };
 
   return (

@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {Nullable} from 'tsHelper';
 import styles from './characterInfo.module.scss';
 
@@ -22,17 +22,22 @@ type Character = {
 
 export const CharacterInfo = () => {
   const [characterData, setCharacterData] = useState<Nullable<Character>>(null);
+  const [noCharacter, setNoCharacter] = useState<boolean>(false);
   const {characterId} = useParams<{characterId: string}>();
+  const placeholderRef = useRef<Nullable<HTMLDivElement>>(null);
 
   useEffect(() => {
     async function fetchCharacter() {
       try {
+        setCharacterData(null);
         const response = await fetch(baseURLToFetch + characterId);
         if (response.ok) {
           const json = await response.json();
           if (json.id) {
             setCharacterData(json);
           }
+        } else {
+          setNoCharacter(true);
         }
       } catch (error) {
         // somehow process an error
@@ -41,6 +46,12 @@ export const CharacterInfo = () => {
 
     fetchCharacter();
   }, [characterId]);
+
+  useEffect(() => {
+    if ((placeholderRef.current && noCharacter)) {
+      placeholderRef.current.textContent = 'There is no such an element';
+    }
+  }, [noCharacter]);
 
   return (
     characterData
@@ -81,8 +92,6 @@ export const CharacterInfo = () => {
         </div>
       </div>
       :
-      <div className={styles.notFound}>
-        There's no such a character
-      </div>
+      <div ref={placeholderRef} className={styles.placeholder}>Loading...</div>
   )
 };

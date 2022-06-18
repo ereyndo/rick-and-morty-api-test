@@ -1,5 +1,5 @@
 import {CharacterCard} from '../CharacterCard';
-import styles from './characterLibrary.module.scss';
+import styles from './commonList.module.scss';
 import {useEffect, useState} from 'react';
 import {Placeholder} from '../../Placeholder';
 import {CharacterForList} from 'tsHelper';
@@ -7,7 +7,7 @@ import {getFormattedList} from 'services/getFormatedList';
 
 const baseURLToFetch = 'https://rickandmortyapi.com/api/character/?page=1';
 
-export const CharacterLibrary = () => {
+export const CommonList = () => {
   const [listOfCharacters, setListOfCharacters] = useState<CharacterForList[]>([]);
   const [nextPageToFetch, setNextPageToFetch] = useState<string>('');
   const [needToFetchNewCharacters, setNeedToFetchNewCharacters] = useState<boolean>(false);

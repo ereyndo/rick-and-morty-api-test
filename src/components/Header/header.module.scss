@@ -18,4 +18,14 @@
     height: 56px;
     cursor: pointer;
   }
+
+  .navTools {
+    display: flex;
+
+    .likedLink {
+      margin: 0 10px;
+      color: $mainColor;
+      border-color: $mainColor;
+    }
+  }
 }

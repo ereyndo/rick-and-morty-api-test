@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import styles from '../CharacterLibrary/characterLibrary.module.scss';
+import styles from '../CommonList/commonList.module.scss';
 import {CharacterCard} from '../CharacterCard';
 import {Placeholder} from '../../Placeholder';
 import {CharacterForList} from 'tsHelper';

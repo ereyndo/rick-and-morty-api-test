@@ -1,23 +1,14 @@
-import {CharacterCard} from './CharacterCard';
-import styles from './characterLibrary.module.scss';
+import {CharacterCard} from '../CharacterCard';
+import styles from './commonList.module.scss';
 import {useEffect, useState} from 'react';
 import {Placeholder} from '../../Placeholder';
+import {CharacterForList} from 'tsHelper';
+import {getFormattedList} from 'services/getFormatedList';
 
-type CharacterProps = {
-  pageName: string
-}
+const baseURLToFetch = 'https://rickandmortyapi.com/api/character/?page=1';
 
-type Character = {
-  id: number,
-  name: string,
-  status: string,
-  image: string
-}
-
-const baseURLToFetch = 'https://rickandmortyapi.com/api/character/?page=0';
-
-export const CharacterLibrary = ({pageName}: CharacterProps) => {
-  const [listOfCharacters, setListOfCharacters] = useState<Character[]>([]);
+export const CommonList = () => {
+  const [listOfCharacters, setListOfCharacters] = useState<CharacterForList[]>([]);
   const [nextPageToFetch, setNextPageToFetch] = useState<string>('');
   const [needToFetchNewCharacters, setNeedToFetchNewCharacters] = useState<boolean>(false);
 
@@ -27,14 +18,8 @@ export const CharacterLibrary = ({pageName}: CharacterProps) => {
         const response = await fetch(baseURLToFetch);
         if (response.ok) {
           const json = await response.json();
-          setListOfCharacters(json.results.map((el: Character) => {
-            return {
-              id: el.id,
-              name: el.name,
-              status: el.status,
-              image: el.image,
-            }
-          }));
+          const formattedList = getFormattedList(json.results);
+          setListOfCharacters(formattedList);
           setNextPageToFetch(json.info.next);
         }
       } catch (error) {
@@ -52,8 +37,7 @@ export const CharacterLibrary = ({pageName}: CharacterProps) => {
         setNeedToFetchNewCharacters(true);
       }
     };
-    // clean up code
-    window.removeEventListener('scroll', onScroll);
+
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -64,10 +48,11 @@ export const CharacterLibrary = ({pageName}: CharacterProps) => {
         const response = await fetch(nextPageToFetch);
         if (response.ok) {
           const json = await response.json();
+          const formattedList = getFormattedList(json.results);
           setListOfCharacters(prevListOfCharacters => {
             return [
               ...prevListOfCharacters,
-              ...json.results
+              ...formattedList
             ]
           });
           setNextPageToFetch(json.info.next);

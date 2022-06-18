@@ -1,0 +1,12 @@
+@import 'assets/styles/colors';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  &LikeTool {
+    background-color: rgba(131, 154, 97, 0.53);
+  }
+}

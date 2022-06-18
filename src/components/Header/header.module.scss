@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 8px 20px;
+  padding: 5px 20px;
   background-color: $secondaryColor;
   z-index: 100;
 
@@ -17,5 +17,15 @@
   .logo {
     height: 56px;
     cursor: pointer;
+  }
+
+  .navTools {
+    display: flex;
+
+    .likedLink {
+      margin: 0 10px;
+      color: $mainColor;
+      border-color: $mainColor;
+    }
   }
 }

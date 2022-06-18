@@ -16,7 +16,6 @@ type CharacterLabeled = {
 const baseURLToFetch = 'https://rickandmortyapi.com/api/character/?name=';
 
 export const Search = () => {
-  const [open, setOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState<CharacterLabeled[]>([]);
   const [needToFetchData, setNeedToFetchData] = useState<string>('');
@@ -25,14 +24,13 @@ export const Search = () => {
 
   const navigate = useNavigate();
 
-  const handleChangeInput = (event: SyntheticEvent<Element, Event>, value: string) => {
+  const handleInputChange = (event: SyntheticEvent<Element, Event>, value: string) => {
     setInputValue(value);
 
     if (filterTimeout.current) {
       clearTimeout(filterTimeout.current)
     }
     if (!value) {
-      setOpen(false);
       return;
     }
 
@@ -41,10 +39,10 @@ export const Search = () => {
     }, 500)
   }
 
-  const handleListClick = (event: React.MouseEvent<HTMLElement>, id: number) => {
-    setInputValue('');
-    setOpen(false);
-    navigate(`/character/${id}`);
+  const handleChange = (event: SyntheticEvent<Element, Event>, elem: Nullable<CharacterLabeled>) => {
+    if (elem) {
+      navigate(`/character/${elem.id}`);
+    }
   }
 
   useEffect(() => {
@@ -73,18 +71,12 @@ export const Search = () => {
     }
   }, [needToFetchData])
 
-  useEffect(() => {
-    if (!open && inputValue) {
-      setOpen(true);
-    }
-  }, [open, inputValue]);
-
   return (
     <Autocomplete
-      open={open}
       inputValue={inputValue}
-      onInputChange={handleChangeInput}
-      disablePortal
+      onInputChange={handleInputChange}
+      onChange={handleChange}
+      blurOnSelect
       options={options}
       sx={{ width: 230 }}
       isOptionEqualToValue={(option, value) => {
@@ -95,7 +87,7 @@ export const Search = () => {
       renderOption={(props, option) => {
         const {id, label} = option as CharacterLabeled;
         return (
-          <li {...props} key={id} onClick={(event) => {handleListClick(event, id)}}>
+          <li {...props} key={id}>
             {label}
           </li>
         );

@@ -1,0 +1,69 @@
+@import 'assets/styles/colors';
+@import 'assets/styles/mixins';
+
+.container {
+  margin: 40px 80px;
+  color: $secondaryColor;
+
+  @include screen-tablet {
+    margin: 40px 40px;
+  }
+
+  @include screen-mobile {
+    margin: 40px 20px;
+  }
+}
+
+.name {
+  margin-bottom: 46px;
+  text-align: center;
+  font-size: 36px;
+  text-shadow: 0 0 3px #98b6c2;
+
+  @include screen-mobile {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  @include screen-mobile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .img {
+    flex: 0.3;
+    min-width: 230px;
+    object-fit: contain;
+    border-radius: 20px;
+  }
+
+  .textInfo {
+    flex: 0.7;
+    margin-left: 80px;
+    font-size: 18px;
+
+    @include screen-tablet {
+      margin-left: 40px;
+    }
+
+    @include screen-mobile {
+      margin: 40px 0 0 0;
+    }
+
+    &Item {
+      margin-bottom: 6px;
+      color: $lightGreyColor;
+
+      .nameOfKey {
+        color: $secondaryColor;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import 'sizes';
+@import 'colors';
+
+@mixin screen-tablet {
+  @media (min-width: #{$mobileWidth}) and (max-width: #{$tabletWidth}) {
+    @content;
+  }
+}
+
+@mixin screen-mobile {
+  @media (max-width: #{$mobileWidth}) {
+    @content;
+  }
+}
+
+@mixin screen-desktop {
+  @media (min-width: #{$tabletWidth + 1px}) {
+    @content;
+  }
+}

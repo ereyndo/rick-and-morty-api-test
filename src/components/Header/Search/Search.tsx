@@ -78,7 +78,7 @@ export const Search = () => {
       onChange={handleChange}
       blurOnSelect
       options={options}
-      sx={{ width: 230 }}
+      sx={{ width: 200 }}
       isOptionEqualToValue={(option, value) => {
         const {id: optionId} = option as CharacterLabeled;
         const {id: valueId} = value as CharacterLabeled;

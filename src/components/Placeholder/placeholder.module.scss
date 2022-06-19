@@ -2,7 +2,10 @@
 @import 'assets/styles/sizes';
 
 .placeholder {
-  line-height: $mainHeight;
+  position: absolute;
+  top: 50vh;
+  transform: translate(0, -50%);
+  width: 100%;
   text-align: center;
   font-size: 40px;
   font-weight: bold;
